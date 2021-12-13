@@ -1,0 +1,32 @@
+body, html{
+    height: 100%;
+    margin: 0;
+}
+
+.header{
+    height: 60px;
+    background-color: rgb(85, 122, 163);
+    padding: 20px;
+    font-size: 3em;
+}
+
+.main-container{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 100px);
+}
+
+.sidebar{
+    width: 200px;
+    max-width: 30vw;
+    background-color: rgb(121, 174, 207);
+}
+
+.sidebar-cat{
+    padding: 10px;
+}
+
+.main{
+    background-color: rgb(200, 234, 255);
+    flex-grow: 1;
+}

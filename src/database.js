@@ -19,7 +19,7 @@ function getDatabase(command = "get"){
         storedDatabase = Database();
         return storedDatabase;
     } else if(command ==='get'){
-        console.log(storedDatabase)
+        // console.log(storedDatabase)
         if(storedDatabase == undefined){
             storedDatabase = Database();
             return storedDatabase;;

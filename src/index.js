@@ -1,10 +1,14 @@
 import './style.css';
 import { Task } from './card.js';
-import { createCard, addTaskWindow } from './html.js';
-import { getDatabase } from './data.js';
+import { createCard, addTaskWindow, populateCards, initTaskbar } from './html.js';
+import { getDatabase } from './database.js';
+
+initTaskbar();
 
 let main = document.getElementById('main');
 let addBtn = document.getElementById('add-button');
+
+
 
 //addTaskWindow()
 addBtn.addEventListener('click', addTaskWindow);
@@ -28,21 +32,30 @@ function testCard() {
 
 function testData() {
    let data = getDatabase();
-   let testCard = Task("test name", `test description
-   lala
-   alala
-   lala`, "test date", "test project", false);
+   let testCard = Task("First Task", `lorem ipsum
+   lorem ipsum
+   lorem ipsum lorem ipsum`, "2021-12-22", "Programming", false);
+
+   let testCard2 = Task("Second Task", `lorem ipsum
+   lorem ipsum
+   lorem ipsum lorem ipsum`, "2021-12-23", "Programming", false);
+
+   let testCard3 = Task("Third Task", `lorem ipsum
+   lorem ipsum
+   lorem ipsum lorem ipsum`, "2021-12-22", "", false);
+
+   let testCard4 = Task("Fourth Task", `lorem ipsum
+   lorem ipsum
+   lorem ipsum lorem ipsum`, "2022-01-21", "Laundry", false);
 
    data.addTask(testCard);
-   data.addTask(testCard);
-   data.addTask(testCard);
+   data.addTask(testCard2);
+   data.addTask(testCard3);
+   data.addTask(testCard4);
 
-   for (let i = 0; i < data.getData().length; i++){
-      // console.log(data.getData()[i]);
-      main.appendChild(createCard(data.getData()[i]));
-   }
+   populateCards();
 
-   console.log(data.getData());   
+   // console.log(data.getData());   
 
 }
 

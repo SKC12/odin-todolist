@@ -26,6 +26,18 @@ body, html{
     padding: 10px;
 }
 
+#projects-container{
+    background-color: rgb(162, 214, 247);
+    margin: 0 2em;
+    padding: 0.1em 1em;
+    font-size: 0.8em;
+}
+
+.taskbar-project{
+    margin: 0;
+    padding: 0.5em;
+}
+
 #main{
     background-color: rgb(200, 234, 255);
     flex-grow: 1;
@@ -60,17 +72,28 @@ body, html{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
 }
 
 .card-bot-container {
     padding: 10px;
 }
 
-.card-left, .card-right{
+.card-left, .card-right, .card-project{
     display: flex;
     flex-direction: row;
     gap: 10px;
     padding-left: 10px;
+    flex-grow:1;
+}
+
+.card-project{
+    justify-content: center;
+}
+
+.card-right{
+    justify-content: end;
+
 }
 
 .checkbox{

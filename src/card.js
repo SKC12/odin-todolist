@@ -10,8 +10,9 @@ const Task = (name, description, date, project, status) => {
         status = !status;
     }
 
+    const getJSON = () => {return {name, description, date, project, status}};
 
-    return {getName, getDescription, getDate, getProject, getStatus, flipStatus};
+    return {getName, getDescription, getDate, getProject, getStatus, flipStatus, getJSON};
 }
 
 

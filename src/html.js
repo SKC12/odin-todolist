@@ -1,6 +1,6 @@
 import { Task } from './card.js';
 import { getDatabase } from './database.js';
-import { isToday, isThisWeek } from 'date-fns';
+import { isToday, isThisWeek, isAfter } from 'date-fns';
 
 const initTaskbar = () => {
     let all = document.getElementById('all');
@@ -27,6 +27,18 @@ const createCard = (task) => {
     let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.classList.add('checkbox');
+    if(task.getStatus()){
+        checkbox.checked = true;
+    }
+    checkbox.addEventListener('change', (e)=>{
+        if(e.target.checked){
+            flipTask(task);
+            console.log('1')
+        } else {
+            flipTask(task);
+            console.log('2')
+        }
+    })
 
     let name = document.createElement('p');
     name.classList.add('card-name');
@@ -45,14 +57,9 @@ const createCard = (task) => {
     let remove = document.createElement('button');
     remove.classList.add('card-remove');
     remove.innerText = 'Del'
-    remove.addEventListener('click', () => {
-        let data = getDatabase().getData();
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].getName() === task.getName() && data[i].getDate() === task.getDate()) {
-                data.splice(i, 1);
-            };
-        };
-        main.removeChild(container)
+    remove.addEventListener('click', () => {               
+        getDatabase().removeTask(task.getName(), task.getDate());
+        main.removeChild(container);
     });
 
     rightSide.appendChild(date);
@@ -86,6 +93,11 @@ const createCard = (task) => {
 
     return container;
 };
+
+function flipTask(task){
+    getDatabase().flipTask(task);
+    populateCards();   
+}
 
 const addTaskWindow = () => {
 
@@ -181,10 +193,23 @@ function clearCards() {
 
 function populateCards(filter = 'all') {
     clearCards();
-    let data = getDatabase().getData();
+    let data = getDatabase().getData(); 
+
     data.sort((a, b) => {
-        return new Date(a.getDate()) - new Date(b.getDate());
-    });
+        let aDate=new Date(a.getDate());
+        let bDate=new Date(b.getDate());
+        if(isAfter(aDate,bDate)){
+            return 1;
+        } else if(isAfter(bDate, aDate)){
+            return -1;
+        } else if(a.getName()<b.getName()){
+            console.log('gere')
+            return -1;
+        } else {
+            return 1;
+        }
+        });
+        
     if (filter === 'all') {
         //console.log(data);
         for (let i = 0; i < data.length; i++) {

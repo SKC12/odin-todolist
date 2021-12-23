@@ -8,27 +8,15 @@ initTaskbar();
 let main = document.getElementById('main');
 let addBtn = document.getElementById('add-button');
 
-
-
-//addTaskWindow()
 addBtn.addEventListener('click', addTaskWindow);
 
+init();
 
-
-
-
-
-
-
-function testCard() {
-   let testCard = Task("test name", "test description", "test date", "test project", false);
-   let htmlCard = createCard(testCard);
-   console.log(htmlCard);
-
-   //main.appendChild(htmlCard);
+function init() {
+   getDatabase().loadFromLocalStorate();
+   populateCards();
 }
 
-//testCard();
 
 function testData() {
    let data = getDatabase();
@@ -55,19 +43,7 @@ function testData() {
 
    populateCards();
 
-   // console.log(data.getData());   
-
 }
-
-testData();
 
 //testData();
 
-
-
-
-// let testCard = Task("test name", "test description", "test date", "test project", false);
-// console.log(testCard)
-// console.log(testCard.getName())
-
-// createCard(testCard);
